@@ -70,7 +70,7 @@ function dailyReading(){state.mode='1';state.cards=[DECK[dailyIndex()%DECK.lengt
 function home(){
  return `<section class="official-home" aria-label="Iluminando Almas. Inicio">
  <h1 class="sr-only">Iluminando Almas</h1>
- <img src="assets/home-official.webp" width="710" height="1218" alt="Bienvenida a Iluminando Almas. Mujer mística con cartas de tarot, cielo estrellado violeta, energía de hoy, tirada del día y accesos a lecturas, horóscopo, rituales, diario y compatibilidad." fetchpriority="high" decoding="async">
+ <img src="assets/home-official.webp?v=portada-exacta-20261110-v6" width="710" height="1218" alt="Bienvenida a Iluminando Almas. Mujer mística con cartas de tarot, cielo estrellado violeta, energía de hoy, tirada del día y accesos a lecturas, horóscopo, rituales, diario y compatibilidad." fetchpriority="high" decoding="async">
  <button class="official-hit" style="left:3%;top:1%;width:12%;height:7%" data-page="profile" aria-label="Abrir menú y mi espacio"></button>
  <button class="official-hit" style="left:88%;top:1%;width:10%;height:8%" data-page="history" aria-label="Ver mis tiradas guardadas"></button>
  <button class="official-hit" style="left:3%;top:35%;width:94%;height:14.5%" data-energy="1" aria-label="Leer la energía de hoy"></button>
