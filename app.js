@@ -49,8 +49,6 @@ document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)r
 document.addEventListener('input',e=>{if(e.target.id==='search'){const start=e.target.selectionStart;state.search=e.target.value;render();const f=$('search');f.focus();f.setSelectionRange(start,start)}});
 $('back').addEventListener('click',()=>go(state.page==='home'?'about':'home'));$('cartBtn').addEventListener('click',()=>go('cart'));
 if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
-render();
-
 
 /* Iluminando Almas v2 — visual celestial y experiencias locales. */
 const SIGNS=['Aries','Tauro','Géminis','Cáncer','Leo','Virgo','Libra','Escorpio','Sagitario','Capricornio','Acuario','Piscis'];
@@ -122,3 +120,5 @@ document.addEventListener('change',e=>{
  if(e.target.id==='signA'){state.signA=e.target.value;render()}
  if(e.target.id==='signB'){state.signB=e.target.value;render()}
 });
+
+render();
