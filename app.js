@@ -44,7 +44,7 @@ function rituals(){return header('Consejos y bienestar','Ideas sencillas para ac
 function about(){return header('Acerca de','Iluminando Almas')+`<section class="panel"><h3>Conocé a Camila</h3><p>Camila te acompaña en las lecturas del Tarot de Marsella, con interpretaciones basadas en sus símbolos tradicionales.</p><p>Versión demostrativa 1.0 · BM-Apps</p></section><div class="actions"><button class="tile" data-page="privacy">Privacidad</button><button class="tile" data-page="terms">Términos</button></div>`}
 function contact(){return header('Contacto')+`<section class="panel"><p>Los datos de contacto comercial se incorporarán cuando el cliente los confirme.</p><p>WhatsApp: pendiente</p><p>Correo electrónico: pendiente</p></section>`}
 function legal(type){return header(type==='privacy'?'Política de privacidad':'Términos de uso')+`<div class="panel"><p>Consultá el documento completo:</p><a class="btn wide" href="${type==='privacy'?'privacy.html':'terms.html'}" target="_blank" rel="noopener">Abrir documento</a></div>`}
-function render(){const pages={home,tarot,pick,result,shop,cart,history,rituals,horoscope,journal,compatibility,about,contact,privacy:()=>legal('privacy'),terms:()=>legal('terms')};$('app').innerHTML=(pages[state.page]||home)();$('cartCount').textContent=state.cart.reduce((n,i)=>n+i.qty,0)||'';$('back').textContent=state.page==='home'?'☰':'‹';document.querySelectorAll('.bottom button').forEach(b=>b.style.opacity=b.dataset.page===state.page?'1':'.65');}
+function render(){const pages={home,tarot,pick,result,shop,cart,history,rituals,horoscope,journal,compatibility,profile,about,contact,privacy:()=>legal('privacy'),terms:()=>legal('terms')};document.body?.classList?.toggle('official-home-active',state.page==='home');$('app').innerHTML=(pages[state.page]||home)();$('cartCount').textContent=state.cart.reduce((n,i)=>n+i.qty,0)||'';$('back').textContent=state.page==='home'?'☰':'‹';document.querySelectorAll('.bottom button').forEach(b=>b.style.opacity=b.dataset.page===state.page?'1':'.65');}
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.page){if(b.dataset.page==='result'&&state.chosen.length!==state.cards.length)return;go(b.dataset.page)}else if(b.dataset.mode)newReading(b.dataset.mode);else if(b.dataset.pick!==undefined){const n=Number(b.dataset.pick);if(!state.chosen.includes(n)&&state.chosen.length<(state.mode==='1'?1:3)){state.chosen.push(n);state.cards=state.chosen.map(i=>state.deck[i]);render()}}else if(b.dataset.category){state.category=b.dataset.category;render()}else if(b.dataset.add){const p=PRODUCTS.find(p=>p.id===b.dataset.add);if(!p)return;const entry=state.cart.find(i=>i.id===p.id);entry?entry.qty++:state.cart.push({id:p.id,qty:1});save('ia_cart',state.cart);render();toast('Producto agregado')}else if(b.dataset.remove){state.cart=state.cart.filter(i=>i.id!==b.dataset.remove);save('ia_cart',state.cart);render()}else if(b.dataset.delete!==undefined){state.history.splice(Number(b.dataset.delete),1);save('ia_history',state.history);render()}else if(b.id==='resetPick')newReading(state.mode);else if(b.id==='speak')speak(interpretation());else if(b.id==='stopSpeak')stopVoice();else if(b.id==='saveReading'){state.history.unshift({date:new Date().toLocaleString('es-AR'),names:state.cards.map(c=>c.name),message:interpretation()});state.history=state.history.slice(0,50);save('ia_history',state.history);toast('Tirada guardada')}else if(b.id==='clearHistory'){if(confirm('¿Borrar todas las tiradas guardadas?')){state.history=[];save('ia_history',[]);render()}}else if(b.id==='order'){if(!CONFIG.whatsapp)return;const msg='Hola, quisiera consultar estos productos: '+state.cart.map(i=>{const p=PRODUCTS.find(p=>p.id===i.id);return p?`${p.name} x${i.qty}`:''}).join(', ');window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank','noopener')}});
 document.addEventListener('input',e=>{if(e.target.id==='search'){const start=e.target.selectionStart;state.search=e.target.value;render();const f=$('search');f.focus();f.setSelectionRange(start,start)}});
 $('back').addEventListener('click',()=>go(state.page==='home'?'about':'home'));$('cartBtn').addEventListener('click',()=>go('cart'));
@@ -68,19 +68,24 @@ const todayId=()=>new Date().toLocaleDateString('en-CA');
 function dailyIndex(salt=0){const s=todayId();let n=2166136261;for(const ch of s){n=Math.imul(n^ch.charCodeAt(0),16777619)}return Math.abs((n>>>0)+salt)}
 function dailyReading(){state.mode='1';state.cards=[DECK[dailyIndex()%DECK.length]];state.chosen=[0];go('result')}
 function home(){
- const d=DAILY_THEMES[dailyIndex()%DAILY_THEMES.length];
- return `<section class="cosmic-hero" aria-label="Bienvenida a Iluminando Almas">
- <div class="hero-caption"><span class="eyebrow">✦ TU ESPACIO DE INTUICIÓN ✦</span><h1>Iluminando<br>Almas</h1><p>Conectá con tu intuición y encontrá un momento para vos.</p></div></section>
- <section class="panel featured-energy"><span class="eyebrow">☾ ✧ ☽</span><h2>Tu energía de hoy</h2><p><strong>${escapeHTML(d[0])}</strong></p><p>${escapeHTML(d[1])}</p><small>Inspiración diaria para reflexionar, no una predicción.</small></section>
- <section class="daily-draw panel"><div><span class="eyebrow">✧ MENSAJE DEL DÍA</span><h2>Tirada del día</h2><p>Descubrí una carta del Tarot de Marsella y su significado simbólico.</p><button class="btn" data-daily="1">Hacer mi tirada</button></div><div class="mini-spread" aria-hidden="true"><span>☾</span><span>✺</span><span>☽</span></div></section>
- <h2 class="section-title">Explorá tu universo</h2><div class="celestial-grid">
- <button class="portal" data-page="tarot"><b>☼</b><strong>Lectura interactiva</strong><small>Elegí entre 78 cartas</small></button>
- <button class="portal" data-page="horoscope"><b>✶</b><strong>Horóscopo</strong><small>Tu inspiración zodiacal</small></button>
- <button class="portal" data-page="rituals"><b>☾</b><strong>Rituales</strong><small>Momentos de intención</small></button>
- <button class="portal" data-page="journal"><b>✎</b><strong>Diario espiritual</strong><small>Guardá tus reflexiones</small></button>
- <button class="portal" data-page="compatibility"><b>♡</b><strong>Compatibilidad</strong><small>Explorá los signos</small></button>
- <button class="portal" data-page="shop"><b>✦</b><strong>Tienda</strong><small>Catálogo en preparación</small></button>
- </div><p class="center muted">Camila te acompaña con lecturas simbólicas para el entretenimiento y la reflexión personal.</p>`;
+ return `<section class="official-home" aria-label="Iluminando Almas. Inicio">
+ <h1 class="sr-only">Iluminando Almas</h1>
+ <img src="assets/home-official.webp" width="710" height="1218" alt="Bienvenida a Iluminando Almas. Mujer mística con cartas de tarot, cielo estrellado violeta, energía de hoy, tirada del día y accesos a lecturas, horóscopo, rituales, diario y compatibilidad." fetchpriority="high" decoding="async">
+ <button class="official-hit" style="left:3%;top:1%;width:12%;height:7%" data-page="profile" aria-label="Abrir menú y mi espacio"></button>
+ <button class="official-hit" style="left:88%;top:1%;width:10%;height:8%" data-page="history" aria-label="Ver mis tiradas guardadas"></button>
+ <button class="official-hit" style="left:3%;top:35%;width:94%;height:14.5%" data-energy="1" aria-label="Leer la energía de hoy"></button>
+ <button class="official-hit" style="left:6%;top:63%;width:42%;height:7%" data-daily="1" aria-label="Hacer mi tirada del día"></button>
+ <button class="official-hit" style="left:2%;top:72.5%;width:32%;height:14.6%" data-page="tarot" aria-label="Lectura interactiva de tarot"></button>
+ <button class="official-hit" style="left:35%;top:72.5%;width:31%;height:14.6%" data-page="horoscope" aria-label="Horóscopo"></button>
+ <button class="official-hit" style="left:67%;top:72.5%;width:31%;height:14.6%" data-page="rituals" aria-label="Rituales"></button>
+ <button class="official-hit" style="left:2%;top:87.4%;width:47%;height:12.6%" data-page="journal" aria-label="Diario espiritual"></button>
+ <button class="official-hit" style="left:50%;top:87.4%;width:48%;height:12.6%" data-page="compatibility" aria-label="Compatibilidad"></button>
+ </section>`;
+}
+function profile(){
+ return header('Mi espacio','Tus opciones de Iluminando Almas')+
+ `<section class="panel"><h3>Bienvenida a tu rincón</h3><p>Las lecturas y reflexiones que decidas guardar permanecen en este dispositivo.</p></section>
+ <div class="actions"><button class="tile" data-page="history">Mis tiradas</button><button class="tile" data-page="journal">Diario espiritual</button><button class="tile" data-page="shop">Tienda</button><button class="tile" data-page="about">Acerca de</button><button class="tile" data-page="privacy">Privacidad</button><button class="tile" data-page="terms">Términos</button></div>`;
 }
 function horoscope(){
  const sign=state.sign||read('ia_sign','Aries');const d=DAILY_THEMES[dailyIndex(SIGNS.indexOf(sign)*29)%DAILY_THEMES.length];
@@ -108,6 +113,7 @@ function journal(){
 document.addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;
  if(b.dataset.daily!==undefined)dailyReading();
+ else if(b.dataset.energy!==undefined){const d=DAILY_THEMES[dailyIndex()%DAILY_THEMES.length];toast(d[0]+': '+d[1])}
  else if(b.dataset.ritual){state.selectedRitual=b.dataset.ritual;render()}
  else if(b.dataset.completeRitual){const done=read('ia_ritual_done',{});done[todayId()+':'+b.dataset.completeRitual]=true;save('ia_ritual_done',done);render();toast('Tu práctica quedó registrada')}
  else if(b.dataset.mood){state.journalMood=b.dataset.mood;state.journalDraft=$('entry')?.value||'';render()}
