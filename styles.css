@@ -91,3 +91,10 @@ h3{font-size:23px}
 @media(min-width:650px){.celestial-grid{grid-template-columns:repeat(3,1fr)}.cosmic-hero{height:500px}.hero-caption{right:6%;width:49%}}
 @media(max-width:370px){.daily-draw{grid-template-columns:1fr}.mini-spread{min-height:120px}.ritual-tiles{grid-template-columns:1fr}.ritual-tile{min-height:80px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Tarot selection scene */
+.camila-table{min-height:220px;border:1px solid #c99ac9;border-radius:22px;margin-bottom:18px;position:relative;overflow:hidden;background:linear-gradient(0deg,#140c32e6,transparent 90%),url('assets/hero-celestial.svg') 40% 35%/cover;box-shadow:0 12px 28px #0006}
+.camila-table-caption{position:absolute;bottom:12px;left:12px;right:12px;display:flex;flex-direction:column;gap:4px;text-align:center;color:#fff8fa;text-shadow:0 2px 8px #09021f}
+.camila-table-caption strong{color:#ffe1b4;font-family:Georgia,serif;font-size:22px}
+.camila-table-caption span{font-size:13px}
+@media(min-width:520px){.camila-table{min-height:300px}}
