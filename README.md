@@ -1,55 +1,26 @@
-# Iluminando Almas — demo funcional 1.0
+# Iluminando Almas — Rediseño celestial v2 (rama de revisión)
 
-App web progresiva (PWA) para presentar a un cliente. Diseño negro, rojo y dorado. Camila es un personaje ilustrado basado en una fotografía de referencia.
+Actualización sobre la PWA existente. Se preserva Tarot de Marsella de 78 cartas, selección manual, tiradas de una o tres cartas, interpretaciones simbólicas, voz del dispositivo, historial local y catálogo de comercio en preparación.
 
-## Incluye
-- Pantalla de inicio con Camila; menú y navegación inferior.
-- Baraja de 78 cartas, selección aleatoria y tiradas de 1 o 3 cartas, amor, trabajo y general.
-- Interpretaciones simbólicas escritas y lectura por voz del dispositivo (Web Speech API, si disponible).
-- Historial de tiradas local, eliminación individual o total.
-- Catálogo con categorías, buscador y carrito preparado; sin productos ni precios ficticios.
-- Consejos, contacto pendiente, privacidad, términos, iconos, manifest y caché offline.
+## Actualizado
+- Portada celeste/violeta y oro con ilustración vectorial original; navegación de cinco accesos.
+- Tirada del día con carta determinista por fecha local, además de la selección manual completa del mazo.
+- Horóscopo recreativo por signo (sin afirmaciones predictivas).
+- Compatibilidad zodiacal lúdica.
+- Ritual de luna, ejercicio de calma y afirmación del día con seguimiento local.
+- Diario con estado de ánimo, reflexión, guardado y borrado individual en el dispositivo.
+- Íconos instalables PNG 192x192 y 512x512, SVG, manifest y caché offline v2.
+- Textos de privacidad y términos actualizados para el almacenamiento local del diario.
 
-## Probar
-1. Extraer el ZIP.
-2. Abrir una terminal en la carpeta `iluminando-almas`.
-3. Ejecutar `python -m http.server 8080`.
-4. Abrir `http://localhost:8080` en un navegador. Desde otro dispositivo en la misma red, abrir la IP local de la computadora con puerto 8080.
+## Probar en local
+Servir el repositorio con `python -m http.server 8080`, abrir `http://localhost:8080` y comprobar inicio, navegación, tarot, lectura en voz, diario, rituales, horóscopo, compatibilidad, manifest y modo offline. El código no necesita API ni backend.
 
-No se necesita API ni cuenta para probar el tarot. El sintetizador de voz depende del navegador/dispositivo y no se garantiza un timbre argentino ni funcionamiento sin conexión en todos los equipos.
+## Aún pendiente antes de publicación comercial / Play Store
+- Revisar en dispositivo Android real el diseño, accesibilidad y funcionamiento en modo avión; validar que la PWA sea instalable.
+- Crear ilustraciones **individuales del Tarot de Marsella** con licencia adecuada para las 78 cartas; hoy la selección y las caras son representaciones estilizadas, no una baraja ilustrada auténtica.
+- Confirmar datos legales y contacto comercial, políticas finales, audiencia, derechos y posible contenido premium.
+- Catálogo de productos reales, precios, condiciones y canal de pedidos si se desea habilitar la tienda.
+- Generar AAB firmado y realizar las pruebas/revisión requeridas por Google Play; no están hechos.
+- Verificar que GitHub Pages esté habilitado y use `main`, revisar despliegue y caché luego de integrar esta rama.
 
-## Personalización
-- `app.js`: objeto `CONFIG` al inicio (contactos). `PRODUCTS` es un array vacío. Ejemplo de un artículo real cuando el cliente lo autorice:
-  `{id:'sku-001', name:'Nombre aprobado', category:'Sahumerios', description:'Descripción aprobada', price:1200, icon:'🕯'}`
-- Los precios son ARS, se muestran solamente cuando estén definidos en el catálogo real.
-- `assets/camila.png` es una ilustración preliminar extraída de la propuesta gráfica, no una animación 3D ni un modelo animable. El movimiento de labios no está implementado.
-- La versión premium y pagos no están implementados. No se almacenan claves privadas en el cliente.
-
-## Publicar PWA
-Subir todo el contenido a una ruta HTTPS estable, por ejemplo GitHub Pages, manteniendo rutas relativas. Actualizar la versión del caché en `sw.js` después de cada publicación. Verificar que `privacy.html` y `terms.html` tengan URL públicas. Reemplazar los documentos de demostración por versiones con datos del titular.
-
-## Preparar APK / AAB para Google Play (TWA)
-Esta entrega **no contiene APK ni AAB compilados**. Para crear los binarios se necesita una computadora con Android SDK, JDK y Bubblewrap o Android Studio, más una URL HTTPS pública y una clave de firma segura.
-
-Ejemplo de flujo orientativo con Bubblewrap (verificar versiones y documentación vigente):
-1. Publicar y probar la PWA en HTTPS.
-2. Instalar Android SDK, JDK y `@bubblewrap/cli` en la PC.
-3. `bubblewrap init --manifest https://DOMINIO/iluminando-almas/manifest.webmanifest`
-4. Elegir un identificador de paquete único (ej. `com.bmapps.iluminandoalmas`, **solo si está disponible**) y generar una clave de firma bajo control del propietario.
-5. `bubblewrap build` para generar binarios, según versión y configuración.
-6. Publicar `/.well-known/assetlinks.json` en el origen HTTPS con huella SHA-256 del certificado correcto (la firma de Play App Signing puede diferir de la local); verificar pantalla completa sin barra de navegador.
-7. Probar APK en varios Android, incluyendo instalación, navegación, voz, modo offline y enlaces externos. Para Play subir AAB firmado y completar ficha, clasificación, audiencia, Data Safety, política de privacidad, declaración de contenido, accesos de revisión, países y pruebas requeridas para esa cuenta.
-
-Una alternativa es crear una aplicación Android nativa con WebView, pero la TWA permite reutilizar la PWA y exige un dominio verificado.
-
-## Pendiente antes de producción
-- Identidad legal, dirección de contacto y correo del responsable.
-- Autorización de uso comercial de imagen/semejanza de Camila; derechos de imágenes, música y demás recursos.
-- Productos reales, fotografías, precios, stock, condiciones de compra, envíos y devoluciones; WhatsApp comercial.
-- Elegir si habrá IA remota, voz profesional, anuncios, suscripciones o compras digitales. En caso de vender funcionalidades digitales dentro de la app, revisar las reglas de Google Play Billing. Productos físicos tienen tratamiento diferente.
-- Revisar afirmaciones sobre santería y evitar promesas de curación o efectos garantizados.
-- Configurar HTTPS, dominio y política de privacidad definitiva, accesibilidad, pruebas con lectores de pantalla, contraste, rendimiento, fallos, actualización offline y seguridad.
-- Verificar edad objetivo, contenido sensible, consentimiento y políticas de Play actuales antes de presentar a revisión.
-- Si se agrega una API de IA, implementar un backend con control de costos, límites, protección de claves y manejo de datos.
-
-**Estado:** prototipo navegable para aprobación del cliente, no versión de producción ni APK lista para Play.
+Se trata de un avance funcional de PWA, **no** de una versión aprobada por Google Play ni de un producto con pagos habilitados.

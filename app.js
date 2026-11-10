@@ -2,7 +2,7 @@
 // Demo configuration: replace these only with approved client information.
 const CONFIG={businessName:'Iluminando Almas',whatsapp:'',email:'',site:'',premiumEnabled:false};
 const MAJORS=['El Loco','El Mago','La Papisa','La Emperatriz','El Emperador','El Papa','Los Enamorados','El Carro','La Justicia','El Ermitaño','La Rueda de la Fortuna','La Fuerza','El Colgado','Arcano XIII','La Templanza','El Diablo','La Torre','La Estrella','La Luna','El Sol','El Juicio','El Mundo'];
-const MMEAN=['Nuevos comienzos, libertad y confianza en el camino.','Iniciativa, habilidades y capacidad de actuar.','Intuición, silencio y conocimiento interior.','Creatividad, cuidado y abundancia.','Estructura, responsabilidad y límites claros.','Aprendizaje, valores y orientación.','Elecciones afectivas y coherencia con tus valores.','Avance, determinación y dirección.','Coraje, paciencia y dominio de los impulsos.','Introspección, prudencia y búsqueda personal.','Cambios, ciclos y oportunidades inesperadas.','Equilibrio, honestidad y consecuencias.','Pausa, entrega y otra perspectiva.','Transformación, cierre y renovación.','Moderación, armonía y recuperación del equilibrio.','Apegos, tentaciones y patrones limitantes.','Rupturas, revelaciones y reconstrucción.','Esperanza, inspiración y serenidad.','Incertidumbre, sueños y emociones profundas.','Claridad, alegría y vitalidad.','Despertar, evaluación y nuevas decisiones.','Realización, integración y fin de una etapa.'];
+const MMEAN=['Nuevos comienzos, libertad y confianza en el camino.','Iniciativa, habilidades y capacidad de actuar.','Intuición, silencio y conocimiento interior.','Creatividad, cuidado y abundancia.','Estructura, responsabilidad y límites claros.','Aprendizaje, valores y orientación.','Elecciones afectivas y coherencia con tus valores.','Avance, determinación y dirección.','Equilibrio, honestidad y consecuencias.','Introspección, prudencia y búsqueda personal.','Cambios, ciclos y oportunidades inesperadas.','Coraje, paciencia y dominio de los impulsos.','Pausa, entrega y otra perspectiva.','Transformación, cierre y renovación.','Moderación, armonía y recuperación del equilibrio.','Apegos, tentaciones y patrones limitantes.','Rupturas, revelaciones y reconstrucción.','Esperanza, inspiración y serenidad.','Incertidumbre, sueños y emociones profundas.','Claridad, alegría y vitalidad.','Despertar, evaluación y nuevas decisiones.','Realización, integración y fin de una etapa.'];
 const SYMBOLS=['✧','✦','☾','❀','♜','✝','♡','♞','♌','☼','☸','⚖','⌛','✿','☯','♠','⚡','★','☽','☀','♬','◎'];
 const RANKS=['As','Dos','Tres','Cuatro','Cinco','Seis','Siete','Ocho','Nueve','Diez','Sota','Caballo','Reina','Rey'];
 const SUITS=[['Bastos','energía, iniciativa y proyectos','♣'],['Copas','afectos, intuición y vínculos','♥'],['Espadas','ideas, conflictos y decisiones','⚔'],['Oros','recursos, trabajo y estabilidad','◆']];
@@ -44,9 +44,81 @@ function rituals(){return header('Consejos y bienestar','Ideas sencillas para ac
 function about(){return header('Acerca de','Iluminando Almas')+`<section class="panel"><h3>Conocé a Camila</h3><p>Camila te acompaña en las lecturas del Tarot de Marsella, con interpretaciones basadas en sus símbolos tradicionales.</p><p>Versión demostrativa 1.0 · BM-Apps</p></section><div class="actions"><button class="tile" data-page="privacy">Privacidad</button><button class="tile" data-page="terms">Términos</button></div>`}
 function contact(){return header('Contacto')+`<section class="panel"><p>Los datos de contacto comercial se incorporarán cuando el cliente los confirme.</p><p>WhatsApp: pendiente</p><p>Correo electrónico: pendiente</p></section>`}
 function legal(type){return header(type==='privacy'?'Política de privacidad':'Términos de uso')+`<div class="panel"><p>Consultá el documento completo:</p><a class="btn wide" href="${type==='privacy'?'privacy.html':'terms.html'}" target="_blank" rel="noopener">Abrir documento</a></div>`}
-function render(){const pages={home,tarot,pick,result,shop,cart,history,rituals,about,contact,privacy:()=>legal('privacy'),terms:()=>legal('terms')};$('app').innerHTML=(pages[state.page]||home)();$('cartCount').textContent=state.cart.reduce((n,i)=>n+i.qty,0)||'';$('back').textContent=state.page==='home'?'☰':'‹';document.querySelectorAll('.bottom button').forEach(b=>b.style.opacity=b.dataset.page===state.page?'1':'.65');}
+function render(){const pages={home,tarot,pick,result,shop,cart,history,rituals,horoscope,journal,compatibility,about,contact,privacy:()=>legal('privacy'),terms:()=>legal('terms')};$('app').innerHTML=(pages[state.page]||home)();$('cartCount').textContent=state.cart.reduce((n,i)=>n+i.qty,0)||'';$('back').textContent=state.page==='home'?'☰':'‹';document.querySelectorAll('.bottom button').forEach(b=>b.style.opacity=b.dataset.page===state.page?'1':'.65');}
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.page){if(b.dataset.page==='result'&&state.chosen.length!==state.cards.length)return;go(b.dataset.page)}else if(b.dataset.mode)newReading(b.dataset.mode);else if(b.dataset.pick!==undefined){const n=Number(b.dataset.pick);if(!state.chosen.includes(n)&&state.chosen.length<(state.mode==='1'?1:3)){state.chosen.push(n);state.cards=state.chosen.map(i=>state.deck[i]);render()}}else if(b.dataset.category){state.category=b.dataset.category;render()}else if(b.dataset.add){const p=PRODUCTS.find(p=>p.id===b.dataset.add);if(!p)return;const entry=state.cart.find(i=>i.id===p.id);entry?entry.qty++:state.cart.push({id:p.id,qty:1});save('ia_cart',state.cart);render();toast('Producto agregado')}else if(b.dataset.remove){state.cart=state.cart.filter(i=>i.id!==b.dataset.remove);save('ia_cart',state.cart);render()}else if(b.dataset.delete!==undefined){state.history.splice(Number(b.dataset.delete),1);save('ia_history',state.history);render()}else if(b.id==='resetPick')newReading(state.mode);else if(b.id==='speak')speak(interpretation());else if(b.id==='stopSpeak')stopVoice();else if(b.id==='saveReading'){state.history.unshift({date:new Date().toLocaleString('es-AR'),names:state.cards.map(c=>c.name),message:interpretation()});state.history=state.history.slice(0,50);save('ia_history',state.history);toast('Tirada guardada')}else if(b.id==='clearHistory'){if(confirm('¿Borrar todas las tiradas guardadas?')){state.history=[];save('ia_history',[]);render()}}else if(b.id==='order'){if(!CONFIG.whatsapp)return;const msg='Hola, quisiera consultar estos productos: '+state.cart.map(i=>{const p=PRODUCTS.find(p=>p.id===i.id);return p?`${p.name} x${i.qty}`:''}).join(', ');window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank','noopener')}});
 document.addEventListener('input',e=>{if(e.target.id==='search'){const start=e.target.selectionStart;state.search=e.target.value;render();const f=$('search');f.focus();f.setSelectionRange(start,start)}});
 $('back').addEventListener('click',()=>go(state.page==='home'?'about':'home'));$('cartBtn').addEventListener('click',()=>go('cart'));
 if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+
+/* Iluminando Almas v2 — visual celestial y experiencias locales. */
+const SIGNS=['Aries','Tauro','Géminis','Cáncer','Leo','Virgo','Libra','Escorpio','Sagitario','Capricornio','Acuario','Piscis'];
+const DAILY_THEMES=[
+ ['Renovación y claridad','Una oportunidad para observar qué querés comenzar. Elegí hoy un paso pequeño y posible.'],
+ ['Calma y equilibrio','Permitite avanzar a tu ritmo. Darte un momento para pensar también es una decisión.'],
+ ['Creatividad y confianza','Hacé lugar a una idea que te entusiasme; anotala y buscá una manera sencilla de probarla.'],
+ ['Conexión y gratitud','Una conversación o gesto amable puede ayudarte a mirar el día con otros ojos.'],
+ ['Intuición y perspectiva','Escuchá tus emociones, sin dejar de considerar los hechos antes de decidir.']
+];
+const RITUALS=[
+ {id:'luna',icon:'☾',title:'Ritual de luna',desc:'Una pausa para definir una intención.',steps:['Buscá un momento tranquilo.','Escribí una intención concreta para esta semana.','Elegí una acción pequeña que dependa de vos.']},
+ {id:'calma',icon:'✧',title:'Limpieza energética',desc:'Un ejercicio simbólico de renovación.',steps:['Ordená un rincón de tu espacio.','Respirá con tranquilidad un minuto.','Anotá algo que quieras dejar atrás.']},
+ {id:'afirmacion',icon:'✿',title:'Afirmación del día',desc:'Palabras amables para acompañarte.',steps:['Elegí una palabra que necesites hoy.','Decí en voz alta: «Puedo avanzar a mi ritmo».','Escribí algo que hayas logrado.']}
+];
+const todayId=()=>new Date().toLocaleDateString('en-CA');
+function dailyIndex(salt=0){const s=todayId();let n=2166136261;for(const ch of s){n=Math.imul(n^ch.charCodeAt(0),16777619)}return Math.abs((n>>>0)+salt)}
+function dailyReading(){state.mode='1';state.cards=[DECK[dailyIndex()%DECK.length]];state.chosen=[0];go('result')}
+function home(){
+ const d=DAILY_THEMES[dailyIndex()%DAILY_THEMES.length];
+ return `<section class="cosmic-hero" aria-label="Bienvenida a Iluminando Almas">
+ <div class="hero-caption"><span class="eyebrow">✦ TU ESPACIO DE INTUICIÓN ✦</span><h1>Iluminando<br>Almas</h1><p>Conectá con tu intuición y encontrá un momento para vos.</p></div></section>
+ <section class="panel featured-energy"><span class="eyebrow">☾ ✧ ☽</span><h2>Tu energía de hoy</h2><p><strong>${escapeHTML(d[0])}</strong></p><p>${escapeHTML(d[1])}</p><small>Inspiración diaria para reflexionar, no una predicción.</small></section>
+ <section class="daily-draw panel"><div><span class="eyebrow">✧ MENSAJE DEL DÍA</span><h2>Tirada del día</h2><p>Descubrí una carta del Tarot de Marsella y su significado simbólico.</p><button class="btn" data-daily="1">Hacer mi tirada</button></div><div class="mini-spread" aria-hidden="true"><span>☾</span><span>✺</span><span>☽</span></div></section>
+ <h2 class="section-title">Explorá tu universo</h2><div class="celestial-grid">
+ <button class="portal" data-page="tarot"><b>☼</b><strong>Lectura interactiva</strong><small>Elegí entre 78 cartas</small></button>
+ <button class="portal" data-page="horoscope"><b>✶</b><strong>Horóscopo</strong><small>Tu inspiración zodiacal</small></button>
+ <button class="portal" data-page="rituals"><b>☾</b><strong>Rituales</strong><small>Momentos de intención</small></button>
+ <button class="portal" data-page="journal"><b>✎</b><strong>Diario espiritual</strong><small>Guardá tus reflexiones</small></button>
+ <button class="portal" data-page="compatibility"><b>♡</b><strong>Compatibilidad</strong><small>Explorá los signos</small></button>
+ <button class="portal" data-page="shop"><b>✦</b><strong>Tienda</strong><small>Catálogo en preparación</small></button>
+ </div><p class="center muted">Camila te acompaña con lecturas simbólicas para el entretenimiento y la reflexión personal.</p>`;
+}
+function horoscope(){
+ const sign=state.sign||read('ia_sign','Aries');const d=DAILY_THEMES[dailyIndex(SIGNS.indexOf(sign)*29)%DAILY_THEMES.length];
+ return header('Horóscopo de hoy','Una invitación simbólica a mirar tu día')+`<section class="panel horoscope-panel"><div class="zodiac-wheel" aria-hidden="true">✦<span>☾</span></div><label for="sign">Elegí tu signo</label><select id="sign" class="field">${SIGNS.map(s=>`<option ${s===sign?'selected':''}>${s}</option>`).join('')}</select><p class="eyebrow">${escapeHTML(todayId())} · ${escapeHTML(sign)}</p><h3>${escapeHTML(d[0])}</h3><p>${escapeHTML(d[1])}</p><p class="muted">Contenido recreativo, no predice acontecimientos.</p></section><button class="btn secondary wide" data-page="compatibility">Explorar compatibilidad</button>`;
+}
+function compatibility(){
+ const a=state.signA||'Aries',b=state.signB||'Libra';
+ const idx=(SIGNS.indexOf(a)*5+SIGNS.indexOf(b)*7)%DAILY_THEMES.length;
+ const words=['Comunicación','Respeto','Espacios personales','Proyectos compartidos','Escucha y empatía'];
+ return header('Compatibilidad zodiacal','Una mirada lúdica a dos signos')+`<section class="panel"><div class="zodiac-pair"><div><label for="signA">Primer signo</label><select id="signA" class="field">${SIGNS.map(s=>`<option ${s===a?'selected':''}>${s}</option>`).join('')}</select></div><strong>♡</strong><div><label for="signB">Segundo signo</label><select id="signB" class="field">${SIGNS.map(s=>`<option ${s===b?'selected':''}>${s}</option>`).join('')}</select></div></div><h3>${escapeHTML(a)} + ${escapeHTML(b)}</h3><p>Para reflexionar sobre este vínculo, probá poner en primer plano: <strong>${words[idx]}</strong>.</p><p class="muted">Los signos no determinan la compatibilidad real ni el destino de una relación.</p></section>`;
+}
+function rituals(){
+ const selected=RITUALS.find(r=>r.id===state.selectedRitual)||RITUALS[0];
+ const done=read('ia_ritual_done',{});
+ return header('Tu espacio sagrado','Prácticas simbólicas para conectar con tu día')+`<section class="ritual-tiles">${RITUALS.map(r=>`<button class="ritual-tile ${r.id===selected.id?'active':''}" data-ritual="${r.id}"><b>${r.icon}</b><strong>${r.title}</strong><small>${r.desc}</small></button>`).join('')}</section>
+ <section class="panel"><span class="eyebrow">☾ MOMENTO PARA VOS</span><h3>${selected.icon} ${selected.title}</h3><p>${selected.desc}</p><ol class="ritual-steps">${selected.steps.map(t=>`<li>${t}</li>`).join('')}</ol><button class="btn wide" data-complete-ritual="${selected.id}">${done[todayId()+':'+selected.id]?'✓ Práctica completada':'Marcar como realizada'}</button></section>
+ <p class="notice">Estas actividades son recreativas y de introspección. No garantizan resultados espirituales ni sustituyen atención profesional.</p>`;
+}
+function journal(){
+ const entries=read('ia_journal',[]), mood=state.journalMood||'Tranquilidad',draft=state.journalDraft||'';
+ const moods=['Alegría','Tranquilidad','Energía','Sensibilidad','Preocupación','Tristeza'];
+ return header('Diario espiritual','Un lugar privado para registrar cómo te sentís')+`<section class="panel diary-panel"><span class="eyebrow">✿ TU MOMENTO DE HOY</span><h3>¿Cómo te sentís?</h3><div class="mood-choices" role="group" aria-label="Elegir emoción">${moods.map(m=>`<button class="chip ${m===mood?'active':''}" data-mood="${m}" aria-pressed="${m===mood}">${m}</button>`).join('')}</div><label for="entry">Tu reflexión</label><textarea id="entry" class="field" rows="5" maxlength="800" placeholder="Escribí algo que agradezcas, una intención o un pensamiento...">${escapeHTML(draft)}</textarea><button class="btn wide" id="saveJournal">Guardar en mi diario</button><p class="muted">Se guarda únicamente en este dispositivo.</p></section>
+ <h2 class="section-title">Mis reflexiones</h2>${entries.length?entries.map((entry,i)=>`<article class="panel diary-entry"><div class="row"><small class="muted">${escapeHTML(entry.date)}</small><button class="smallbtn" data-remove-entry="${i}" aria-label="Eliminar entrada">Eliminar</button></div><strong>${escapeHTML(entry.mood)}</strong><p>${escapeHTML(entry.note)}</p></article>`).join(''):'<p class="empty">Todavía no escribiste en tu diario.</p>'}`;
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.daily!==undefined)dailyReading();
+ else if(b.dataset.ritual){state.selectedRitual=b.dataset.ritual;render()}
+ else if(b.dataset.completeRitual){const done=read('ia_ritual_done',{});done[todayId()+':'+b.dataset.completeRitual]=true;save('ia_ritual_done',done);render();toast('Tu práctica quedó registrada')}
+ else if(b.dataset.mood){state.journalMood=b.dataset.mood;state.journalDraft=$('entry')?.value||'';render()}
+ else if(b.id==='saveJournal'){const note=$('entry')?.value.trim();if(!note){toast('Escribí tu reflexión primero');return}const arr=read('ia_journal',[]);arr.unshift({date:new Date().toLocaleString('es-AR'),mood:state.journalMood||'Tranquilidad',note});save('ia_journal',arr.slice(0,100));state.journalDraft='';render();toast('Reflexión guardada')}
+ else if(b.dataset.removeEntry!==undefined){if(!confirm('¿Eliminar esta reflexión?'))return;const arr=read('ia_journal',[]);arr.splice(Number(b.dataset.removeEntry),1);save('ia_journal',arr);render()}
+});
+document.addEventListener('input',e=>{if(e.target.id==='entry')state.journalDraft=e.target.value});
+document.addEventListener('change',e=>{
+ if(e.target.id==='sign'){state.sign=e.target.value;save('ia_sign',state.sign);render()}
+ if(e.target.id==='signA'){state.signA=e.target.value;render()}
+ if(e.target.id==='signB'){state.signB=e.target.value;render()}
+});
+
 render();
