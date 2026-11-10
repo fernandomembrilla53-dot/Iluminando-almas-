@@ -1,1 +1,93 @@
 :root{color-scheme:dark;--bg:#10070c;--panel:#1c0c12;--panel2:#290a13;--red:#ad1030;--gold:#e4bd73;--soft:#c7b7b5;--line:#76502f}*{box-sizing:border-box}html{background:#0a0608}body{margin:0;background:radial-gradient(ellipse at top,#35101b 0,#10070c 54%);color:#f7e8d7;font-family:Georgia,'Times New Roman',serif;min-height:100dvh}button,input,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}.top{height:64px;position:sticky;top:0;z-index:10;background:#11070dec;border-bottom:1px solid #6c3e30;display:flex;align-items:center;justify-content:space-between;padding:0 14px;backdrop-filter:blur(10px)}.brand{text-align:center;font-size:clamp(16px,4.6vw,24px);color:var(--gold);font-weight:bold;letter-spacing:.2px}.brand span{font-variant:small-caps}.plain{background:none;border:0;color:var(--gold);font-size:23px;min-width:42px;min-height:44px}.plain small{font-size:11px}main{max-width:760px;margin:auto;padding:16px 16px 110px;min-height:calc(100dvh - 130px)}.bottom{position:fixed;bottom:0;left:0;right:0;display:flex;z-index:10;justify-content:space-around;background:#14090ff2;border-top:1px solid var(--line);padding:6px 0 max(6px,env(safe-area-inset-bottom));backdrop-filter:blur(10px)}.bottom button{color:var(--gold);background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:23px;min-width:65px}.bottom span{font:12px system-ui;color:#e5d1bb}.hero{min-height:440px;position:relative;overflow:hidden;border:1px solid #7b3d36;border-radius:22px;background:linear-gradient(0deg,#10070c 1%,transparent 75%),url('assets/camila.png') center 18%/cover;box-shadow:0 12px 40px #0009}.hero::after{content:'✦  ☾  ✦';position:absolute;top:12px;right:18px;color:var(--gold);text-shadow:0 0 15px #eaaa45}.hero-content{position:absolute;bottom:0;left:0;right:0;text-align:center;padding:30px 16px 20px;background:linear-gradient(transparent,#10070cf7 45%)}h1,h2,h3{color:var(--gold);font-weight:normal;text-align:center}h1{font-size:37px;margin:0 0 6px;text-shadow:0 2px 8px #000}h2{font-size:29px;margin:12px 0 18px}h3{font-size:22px;margin:8px 0}p{line-height:1.55}.subtitle{color:#ead1ae;text-align:center}.muted{color:var(--soft);font-size:14px}.center{text-align:center}.panel{background:linear-gradient(155deg,#2b1019,#16090e);border:1px solid #684133;border-radius:16px;padding:16px;margin:12px 0;box-shadow:inset 0 0 24px #0003}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:47px;border:1px solid #d3a45a;border-radius:12px;background:linear-gradient(120deg,#770c24,#b30e30,#660b1f);color:#fff0d3;padding:12px 18px;font-weight:bold;text-decoration:none;text-align:center}.btn.secondary{background:#1d0e15;color:var(--gold)}.btn:disabled{opacity:.45;cursor:not-allowed}.wide{width:100%}.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:15px 0}.tile{min-height:110px;border:1px solid #94623d;border-radius:13px;background:linear-gradient(145deg,#37111e,#15090f);color:var(--gold);font-size:19px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}.tile b{font-size:28px}.listbtn{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;text-align:left;border:1px solid #9b3842;border-radius:13px;background:linear-gradient(120deg,#3c0b1b,#190a10);padding:14px;margin:10px 0;color:#f6e3d0}.listbtn small{display:block;color:#d6bba8;margin-top:5px}.glow{color:var(--gold);text-shadow:0 0 13px #dd7e26}.cardrow{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin:20px 0}.tarotcard{position:relative;width:min(29%,150px);min-width:92px;aspect-ratio:2/3.3;border-radius:10px;border:3px double #e1ad5b;background:radial-gradient(circle at center,#8e182c,#210911 68%);box-shadow:0 7px 18px #0009;display:flex;align-items:center;justify-content:center;flex-direction:column;color:var(--gold);padding:5px;transition:transform .4s}.tarotcard.back{font-size:43px}.tarotcard.back:hover{transform:translateY(-8px)}.tarotcard.revealed{background:linear-gradient(160deg,#ecd8a4,#a97745);color:#241019}.tarotcard .symbol{font-size:45px}.tarotcard .name{font-weight:bold;font-size:clamp(12px,2.8vw,17px);text-align:center}.tarotcard .pos{font-size:11px;text-align:center}.field{display:block;width:100%;padding:12px 14px;border:1px solid #7c5848;border-radius:10px;background:#140a0f;color:#fff;margin:10px 0;font-size:16px}.chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.chip{border:1px solid #855c45;border-radius:18px;background:#210e17;color:#ead4b8;padding:9px 12px}.chip.active{background:#a7112f;color:white}.product{display:flex;gap:13px;align-items:center}.product-art{width:80px;height:90px;flex-shrink:0;border-radius:12px;border:1px solid var(--line);background:radial-gradient(circle,#6e2530,#190c12);display:grid;place-items:center;font-size:39px}.product-body{flex:1;min-width:0}.product-body h3{text-align:left;font-size:18px}.price{color:var(--gold);font-weight:bold}.smallbtn{background:#760e28;color:#fff;border:1px solid #aa5a4a;border-radius:8px;padding:8px 11px}.notice{border-left:3px solid var(--gold);padding:12px;background:#27141a;color:#e5cdbb;font-size:14px}.empty{text-align:center;padding:24px;color:var(--soft)}.section-title{margin-top:26px}.speak{display:flex;align-items:center;justify-content:center;gap:12px}.float{animation:float 4s ease-in-out infinite}.flame{animation:glow 2s ease-in-out infinite alternate}@keyframes float{50%{transform:translateY(-7px)}}@keyframes glow{to{filter:drop-shadow(0 0 16px #ffab42)}}#toast{position:fixed;bottom:83px;left:50%;transform:translateX(-50%);max-width:90%;background:#36202a;border:1px solid var(--gold);border-radius:10px;padding:10px 18px;z-index:20;display:none;text-align:center}.link{color:var(--gold)}.row{display:flex;align-items:center;justify-content:space-between;gap:8px}.divider{height:1px;background:#624337;margin:18px 0}@media(min-width:650px){.hero{min-height:520px;background-size:cover;background-position:center 28%}.actions{grid-template-columns:repeat(3,1fr)}.product-art{width:100px;height:105px}}
+
+
+/* v2 · Celestial visual system */
+:root{--bg:#100d2b;--panel:#231444;--panel2:#39215d;--gold:#f7cf91;--soft:#dbcfeb;--line:#9875b7;--lavender:#ba8ff6;--red:#9e5be6}
+html{background:#0a0921;scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 20% 3%,#4a247f 0%,transparent 34%),radial-gradient(ellipse at 95% 37%,#27245b 0%,transparent 44%),linear-gradient(180deg,#11112f,#110c2b 75%,#080d22);color:#f6eefb;font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.27;background-image:radial-gradient(#fff 1px,transparent 1.5px),radial-gradient(#deb2ff 1px,transparent 1.5px);background-size:91px 91px,137px 137px;background-position:8px 30px,63px 76px}
+h1,h2,h3,.brand,.eyebrow{font-family:Georgia,'Times New Roman',serif}
+.top{height:70px;background:#100e2ce8;border-bottom:1px solid #b388bd70;box-shadow:0 6px 22px #0002}
+.brand{font-size:clamp(18px,5vw,25px);letter-spacing:.5px;text-shadow:0 0 13px #ffbdef65}
+.brand span{font-variant:normal}.plain{color:#f9d69f}
+main{max-width:780px;padding:16px 14px 120px}
+h1{font-size:clamp(37px,9vw,58px);line-height:1.03}
+h2{font-size:clamp(24px,6vw,33px);margin:8px 0 14px}
+h3{font-size:23px}
+.subtitle{color:#e0cbe8}
+.panel{background:linear-gradient(143deg,#38215bcf,#22133fef);border:1px solid #b68ac39c;border-radius:22px;box-shadow:inset 0 1px #f0cafa1c,0 12px 35px #0303153d}
+.btn{border-radius:100px;border:1px solid #ffe0b5;background:linear-gradient(120deg,#d7a3fd,#8b55ce 70%,#a66add);color:#1d1038;box-shadow:inset 0 2px #fff6,0 5px 26px #a85efa66;font-weight:750;min-height:52px}
+.btn:hover,.tile:hover,.portal:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.btn.secondary{background:#2c1c4b;color:#ffe0bc;box-shadow:none}
+.btn:disabled{opacity:.5}
+.bottom{border:1px solid #9578ac9c;border-bottom:0;border-radius:22px 22px 0 0;max-width:780px;margin:auto;background:#1c143af5;box-shadow:0 -8px 30px #08061566;padding:8px 0 max(9px,env(safe-area-inset-bottom))}
+.bottom button{min-width:0;flex:1;font-size:22px;color:#d2bbf9;padding:5px 2px;border-radius:15px}
+.bottom button:hover,.bottom button:focus-visible{background:#7145a05c;color:#ffdbb0}
+.bottom span{color:#e8ddfa;font-size:clamp(10px,2.8vw,13px)}
+.cosmic-hero{height:clamp(340px,85vw,510px);border:1px solid #ebc39f9c;border-radius:28px;position:relative;overflow:hidden;background:radial-gradient(circle at 26% 30%,#b879d7 0,transparent 31%),linear-gradient(150deg,#351c70,#130e32 70%);box-shadow:inset 0 0 80px #f7b9ff22,0 16px 40px #0005}
+.cosmic-hero::before{content:"";position:absolute;inset:0;background:url('assets/hero-celestial.svg') center / cover no-repeat;animation:celestial-enter 1s ease-out both}
+.cosmic-hero::after{content:"";position:absolute;bottom:0;left:0;right:0;height:63%;background:linear-gradient(transparent,#151033 89%)}
+.hero-caption{position:absolute;bottom:15px;right:10px;width:64%;text-align:center;z-index:1;text-shadow:0 3px 12px #050313}
+.hero-caption h1{color:#ffe2af}
+.hero-caption p{font-size:clamp(13px,3.1vw,18px);line-height:1.4;margin:10px auto;max-width:330px}
+.eyebrow{font-size:12px;color:#ffdba7;letter-spacing:1.5px;text-align:center;display:block;text-transform:uppercase}
+.featured-energy{text-align:center;margin-top:16px;background:radial-gradient(ellipse at left,#7247a566,transparent 70%),linear-gradient(115deg,#312258,#3c2163)}
+.featured-energy h2{color:#ffe1ad}
+.featured-energy p{margin:8px auto;max-width:530px}
+.featured-energy strong{color:#f3d9ff}
+.featured-energy small{color:#cfbce5}
+.daily-draw{display:grid;grid-template-columns:1fr .7fr;gap:8px;align-items:center;padding:22px 20px;margin-top:16px;overflow:hidden}
+.daily-draw h2,.daily-draw p{text-align:left}.daily-draw h2{margin:6px 0}.daily-draw .eyebrow{text-align:left}.daily-draw p{color:#e7d5f3;font-size:14px}
+.daily-draw .btn{margin-top:10px}
+.mini-spread{display:flex;align-items:center;justify-content:center;min-height:160px;padding:10px 4px}
+.mini-spread span{flex:0 0 40%;margin-left:-17%;display:grid;place-items:center;font-family:Georgia,serif;font-size:36px;aspect-ratio:2/3.1;color:#f8ce91;border-radius:11px;border:3px double #edc686;background:linear-gradient(155deg,#5e378c,#1c1450);box-shadow:0 3px 20px #b482fc88,inset 0 0 0 5px #3d246b;transform:rotate(-14deg)}
+.mini-spread span:nth-child(2){z-index:1;transform:translateY(-12px);background:linear-gradient(135deg,#8651a9,#222065)}
+.mini-spread span:nth-child(3){transform:rotate(14deg)}
+.section-title{margin:25px 0 14px}
+.celestial-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.portal{min-height:155px;background:radial-gradient(circle at 40% 0%,#8953b055,transparent 68%),linear-gradient(155deg,#3a225d,#211740);border:1px solid #c28fc4;border-radius:20px;box-shadow:inset 0 1px #ffdeea44,0 8px 24px #03021555;color:#fcebd8;padding:16px 12px;display:flex;align-items:center;justify-content:center;gap:5px;flex-direction:column;transition:transform .2s}
+.portal b{font:50px Georgia;color:#ffdcb6;text-shadow:0 0 24px #b88aff}
+.portal strong{font-family:Georgia,serif;font-size:18px;font-weight:normal}
+.portal small{color:#dfcdea;font-size:12px}
+.listbtn{background:linear-gradient(125deg,#493064,#251842);border-color:#a583c4;color:#fcebd7}
+.listbtn small{color:#dccce6}
+.tarotcard{background:radial-gradient(circle,#60418d,#1d164d);border-color:#eac890;color:#ffe0ae}
+.tarotcard.revealed{background:linear-gradient(155deg,#fae9ca,#c9a4d2);color:#26163d}
+.marseille-face{border-radius:8px;min-height:165px}
+.marseille-label{font-size:8px;letter-spacing:1px;text-align:center}
+.deck-scroll{overflow-x:auto;scroll-snap-type:x proximity;padding:22px 8px}
+.deck-fan{display:flex;min-width:max-content;padding:3px 0 12px}
+.fan-card{scroll-snap-align:center;position:relative;flex:0 0 75px;height:145px;margin-right:-36px;transform:rotate(-4deg);border-radius:9px;border:2px double #edcb92;background:radial-gradient(circle at center,#8651a7,#221443);color:#ffdb98;box-shadow:0 7px 18px #04010f8f;transition:transform .2s}
+.fan-card:hover,.fan-card.selected{transform:translateY(-16px) rotate(0deg);z-index:2}
+.fan-card.selected{background:linear-gradient(145deg,#bc8fd5,#533289)}
+.fan-card:disabled{opacity:.5}
+.fan-art{font-size:33px;display:grid;place-items:center}.fan-art small{font-size:18px}
+.chosen-slots{display:flex;justify-content:center;gap:12px;margin:16px auto}
+.chosen-slot{border:2px dashed #ba91cf;border-radius:14px;min-width:85px;min-height:122px;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#f9dcb7;font-size:32px}
+.chosen-slot small{font-size:12px}
+.chip{border-color:#9b7ac1;border-radius:40px;background:#2b2048;color:#f1dcfa}
+.chip.active,.ritual-tile.active{background:#8b58be;color:#fff;border-color:#f4cfb3}
+.field{border-color:#aa88c7;background:#1c1439;color:#fff;border-radius:13px;resize:vertical}
+.notice{background:#292042;border-left-color:#f5c18a;color:#dfd1e8;border-radius:8px}
+.ritual-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ritual-tile{color:#ffe7cf;background:linear-gradient(145deg,#342257,#221b45);border:1px solid #9273b5;border-radius:16px;min-height:150px;padding:12px 6px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.ritual-tile b{font:34px Georgia;color:#f8d59e}
+.ritual-tile strong{font:16px Georgia}
+.ritual-tile small{font-size:11px;line-height:1.25;color:#e4d7eb}
+.ritual-steps{padding-left:24px;line-height:1.7}
+.ritual-steps li{padding:6px}
+.mood-choices{display:flex;gap:7px;overflow:auto;padding:9px 0 15px;margin:4px 0}
+.mood-choices .chip{white-space:nowrap;min-height:40px}
+.diary-entry p{overflow-wrap:anywhere;white-space:pre-wrap}
+.horoscope-panel{text-align:center}
+.zodiac-wheel{width:150px;height:150px;margin:10px auto 20px;border-radius:50%;border:2px solid #e9bd92;display:grid;place-items:center;font-size:85px;color:#ffdb9e;box-shadow:0 0 40px #b477e088,inset 0 0 42px #6d46a766;position:relative}
+.zodiac-wheel span{position:absolute;font-size:30px;color:#fff1c0}
+.zodiac-pair{display:flex;align-items:center;gap:12px}
+.zodiac-pair>div{flex:1;min-width:0}
+.zodiac-pair>strong{font-size:32px;color:#ffd7b1}
+.smallbtn{background:#5e408a;border-color:#b88cbd}
+#toast{background:#362354;border-color:#f5d4a6}
+@keyframes celestial-enter{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
+@media(min-width:650px){.celestial-grid{grid-template-columns:repeat(3,1fr)}.cosmic-hero{height:500px}.hero-caption{right:6%;width:49%}}
+@media(max-width:370px){.daily-draw{grid-template-columns:1fr}.mini-spread{min-height:120px}.ritual-tiles{grid-template-columns:1fr}.ritual-tile{min-height:80px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
