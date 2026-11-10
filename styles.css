@@ -98,3 +98,21 @@ h3{font-size:23px}
 .camila-table-caption strong{color:#ffe1b4;font-family:Georgia,serif;font-size:22px}
 .camila-table-caption span{font-size:13px}
 @media(min-width:520px){.camila-table{min-height:300px}}
+
+
+/* Portada oficial elegida por el propietario — fotografía original del diseño aprobado. */
+body.official-home-active{background:#100b2a;}
+body.official-home-active .top{display:none}
+body.official-home-active main{padding:0 0 95px;max-width:710px}
+.official-home{width:100%;max-width:710px;margin:auto;position:relative;overflow:hidden;background:#16112f}
+.official-home img{width:100%;height:auto;display:block;user-select:none;-webkit-user-drag:none}
+.official-hit{position:absolute;display:block;border:0;border-radius:12px;background:transparent;touch-action:manipulation;cursor:pointer;z-index:2}
+.official-hit:focus-visible{outline:3px solid #ffe8c4;outline-offset:-4px;background:#f7d4a31f}
+.official-hit:active{background:#e8bd9b2f;box-shadow:inset 0 0 18px #ffe5be3d}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+body.official-home-active .bottom{max-width:710px;background:linear-gradient(130deg,#34215c,#1a123f);border-color:#8e66b0;border-radius:22px 22px 0 0;box-shadow:0 -9px 28px #12082e7a}
+body.official-home-active .bottom button{color:#efe1ff;opacity:1!important}
+body.official-home-active .bottom button[data-page="home"]{background:linear-gradient(135deg,#a360d6,#542c93);box-shadow:0 0 16px #ad70d5b5;color:#ffe1c4}
+body.official-home-active .bottom span{color:#eadcf3}
+.camila-table{background-image:linear-gradient(0deg,#160f38ed,transparent 83%),url('assets/home-official.webp');background-position:center bottom,center top}
+@media(min-width:710px){body.official-home-active main{border-left:1px solid #694c8b;border-right:1px solid #694c8b}}
